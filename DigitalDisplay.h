@@ -41,7 +41,7 @@ public:
           text_ (text)
     {
         mText = text_style;
-        back_digits_ = std::string (text, '~');
+        back_digits_ = std::string (*text, '~');
     }
 
     void Draw (IGraphics& g) override
@@ -49,6 +49,7 @@ public:
         g.FillRect (colors_.background_color, mRECT, &BLEND_95);
         g.FillRect (colors_.blur_1_color, mRECT, &BLEND_01);
         g.FillRect (colors_.blur_2_color, mRECT, &BLEND_08);
+        g.DrawText (mText, back_digits_.c_str(), mRECT, &BLEND_20);
 
         g.DrawText (mText, text_.c_str(), mRECT, nullptr);
     }
@@ -62,6 +63,7 @@ private:
     const IBlend BLEND_90 = IBlend (EBlend::Default, 0.90f);
     const IBlend BLEND_85 = IBlend (EBlend::Default, 0.85f);
     const IBlend BLEND_80 = IBlend (EBlend::Default, 0.80f);
+    const IBlend BLEND_20 = IBlend (EBlend::Default, 0.20f);
     const IBlend BLEND_15 = IBlend (EBlend::Default, 0.15f);
     const IBlend BLEND_08 = IBlend (EBlend::Default, 0.08f);
     const IBlend BLEND_01 = IBlend (EBlend::Default, 0.01f);
