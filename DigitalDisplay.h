@@ -68,3 +68,61 @@ private:
     const IBlend BLEND_08 = IBlend (EBlend::Default, 0.08f);
     const IBlend BLEND_01 = IBlend (EBlend::Default, 0.01f);
 };
+
+class DigitalDisplayCaption : public ITextControl
+{
+public:
+    DigitalDisplayCaption (const IRECT& bounds, int paramIdx, const IText& text = DEFAULT_TEXT, bool draw_frame = true)
+        : ITextControl (bounds, "", text, colors_.background_color),
+          m_draw_frame_ (draw_frame)
+    {
+        IControl::SetParamIdx (paramIdx);
+        mDblAsSingleClick = true;
+        mDisablePrompt = false;
+        mIgnoreMouse = false;
+        mText = text;
+
+        back_digits_ = std::string (256ull, '~');
+    }
+
+    void Draw (IGraphics& g) override
+    {
+        if (const auto p_param = GetParam())
+        {
+            p_param->GetDisplay (mStr);
+        }
+
+        if (m_draw_frame_)
+            g.DrawRect (COLOR_BLACK, mRECT, nullptr, 1.0);
+
+        g.FillRect (IColor (255, 17, 17, 17), mRECT, nullptr);
+        g.FillRect (colors_.background_color, mRECT, &BLEND_95);
+        g.FillRect (colors_.color, mRECT, &BLEND_20);
+        g.FillRect (colors_.blur_1_color, mRECT, &BLEND_01);
+        g.FillRect (colors_.blur_2_color, mRECT, &BLEND_08);
+        g.DrawText (mText, back_digits_.c_str(), mRECT, &BLEND_20);
+
+        g.DrawText (mText, mStr.Get(), mRECT, nullptr);
+    }
+
+    void OnMouseDown (float x, float y, const IMouseMod& mod) override
+    {
+        if (mod.L || mod.R)
+            PromptUserInput (mRECT);
+    }
+
+private:
+    std::string back_digits_;
+    DigitalDisplayColors colors_;
+
+    bool m_draw_frame_;
+
+    const IBlend BLEND_95 = IBlend (EBlend::Default, 0.95f);
+    const IBlend BLEND_90 = IBlend (EBlend::Default, 0.90f);
+    const IBlend BLEND_85 = IBlend (EBlend::Default, 0.85f);
+    const IBlend BLEND_80 = IBlend (EBlend::Default, 0.80f);
+    const IBlend BLEND_20 = IBlend (EBlend::Default, 0.20f);
+    const IBlend BLEND_15 = IBlend (EBlend::Default, 0.15f);
+    const IBlend BLEND_08 = IBlend (EBlend::Default, 0.08f);
+    const IBlend BLEND_01 = IBlend (EBlend::Default, 0.01f);
+};
