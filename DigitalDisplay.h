@@ -54,9 +54,10 @@ public:
         g.DrawText (mText, text_.c_str(), mRECT, nullptr);
     }
 
+    DigitalDisplayColors colors_;
+
 private:
     std::string text_;
-    DigitalDisplayColors colors_;
     std::string back_digits_;
 
     const IBlend BLEND_95 = IBlend (EBlend::Default, 0.95f);
@@ -111,9 +112,10 @@ public:
             PromptUserInput (mRECT);
     }
 
+    DigitalDisplayColors colors_;
+
 private:
     std::string back_digits_;
-    DigitalDisplayColors colors_;
 
     bool m_draw_frame_;
 
