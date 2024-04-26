@@ -9,4 +9,4 @@ Short Code
 TODO: Make numbers 0.00 / 100.00 be inline with backdigits
 
 ## LogoWindow
-![Image of LogoWindow](https://github.com/RAR-AUDIO/Gists/blob/main/Images/LogoWindow.png)
+![Image of LogoWindow](https://github.com/RAR-AUDIO/Gists/blob/develop/Images/LogoWindow.png)
