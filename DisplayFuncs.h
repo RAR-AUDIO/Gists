@@ -1,5 +1,4 @@
-﻿// Copyright 2022 RAR-AUDIO. All Rights Reserved.
-#pragma once
+﻿#pragma once
 
 //==================================================================================
 /* IPlug2 Includes */
